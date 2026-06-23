@@ -1,11 +1,11 @@
-// Inicio de la aplicación
+// Inicio del servidor
 
-const pool = require("./src/db/db");
+require("dotenv").config();
 
-pool.connect()
-  .then(() => {
-    console.log("Conectado a PostgreSQL");
-  })
-  .catch((error) => {
-    console.error("Error de conexión:", error.message);
-  });
+const app = require("./src/app");
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor ejecutándose en puerto ${PORT}`);
+});
