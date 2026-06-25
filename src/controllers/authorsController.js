@@ -40,12 +40,6 @@ const addAuthor = async (req, res) => {
   try {
     const { name, email, bio } = req.body;
 
-    if (!name || !email) {
-      return res.status(400).json({
-        message: "Los campos name y email son obligatorios",
-      });
-    }
-
     const newAuthor = await createAuthor({ name, email, bio });
     res.status(201).json(newAuthor);
   } catch (error) {
@@ -66,12 +60,6 @@ const editAuthor = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, bio } = req.body;
-
-    if (!name || !email) {
-      return res.status(400).json({
-        message: "Los campos name y email son obligatorios",
-      });
-    }
 
     const updatedAuthor = await updateAuthor(id, { name, email, bio });
 

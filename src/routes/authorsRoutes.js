@@ -10,10 +10,13 @@ const {
   removeAuthor,
 } = require("../controllers/authorsController");
 
+const validateAuthor = require("../middlewares/validateAuthor");
+const validateId = require("../middlewares/validateId");
+
 router.get("/", getAuthors);
-router.get("/:id", getAuthor);
-router.post("/", addAuthor);
-router.put("/:id", editAuthor);
-router.delete("/:id", removeAuthor);
+router.get("/:id", validateId, getAuthor);
+router.post("/", validateAuthor, addAuthor);
+router.put("/:id", validateId, validateAuthor, editAuthor);
+router.delete("/:id", validateId, removeAuthor);
 
 module.exports = router;

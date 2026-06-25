@@ -11,11 +11,14 @@ const {
   removePost,
 } = require("../controllers/postsController");
 
+const validatePost = require("../middlewares/validatePost");
+const validateId = require("../middlewares/validateId");
+
 router.get("/", getPosts);
-router.get("/author/:authorId", getPostsByAuthor);
-router.get("/:id", getPost);
-router.post("/", addPost);
-router.put("/:id", editPost);
-router.delete("/:id", removePost);
+router.get("/author/:authorId", validateId, getPostsByAuthor);
+router.get("/:id", validateId, getPost);
+router.post("/", validatePost, addPost);
+router.put("/:id", validateId, validatePost, editPost);
+router.delete("/:id", validateId, removePost);
 
 module.exports = router;
